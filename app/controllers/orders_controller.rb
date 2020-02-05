@@ -2,6 +2,10 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @line_items = LineItem.where(order_id: @order.id)
+    @products = @line_items.map {|li| Product.find li.product_id}
+    @enhanced_line_items = @line_items.zip @products
+    @total = @line_items.reduce {|a,b| a.total_price_cents + b.total_price_cents }
   end
 
   def create
