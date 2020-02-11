@@ -13,26 +13,22 @@ RSpec.describe Product, type: :model do
     end
 
     it 'should have a name' do
-      mock_product.name = nil
-      mock_product.save
+      mock_product.update(name: nil)
       expect(mock_product.errors.full_messages).to eql(["Name can't be blank"])
     end
 
     it 'should have a price' do
-      mock_product.price_cents = nil
-      mock_product.save
+      mock_product.update(price_cents: nil)
       expect(mock_product.errors.full_messages).to include("Price cents is not a number")
     end
 
     it 'should have a quantity' do
-      mock_product.quantity = nil
-      mock_product.save
+      mock_product.update(quantity: nil)
       expect(mock_product.errors.full_messages).to include("Quantity can't be blank")
     end
 
     it 'should have a category' do
-      mock_product.category = nil
-      mock_product.save
+      mock_product.update(category: nil)
       expect(mock_product.errors.full_messages).to include("Category can't be blank")
     end
   end
